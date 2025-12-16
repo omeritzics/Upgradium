@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="dev.imranr.obtainium">
+    package="dev.omeritzics.upgradium">
     <application
         android:label="@string/label"
         android:name="${applicationName}"
