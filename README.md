@@ -2,7 +2,7 @@
 
 # ![Obtainium Icon](./assets/graphics/icon_small.png) Obtainium
 
-Get Android app updates straight from the source.
+Upgrade your Android apps directly from the APK source.
 
 Obtainium allows you to install and update apps directly from their releases pages, and receive notifications when new releases are made available.
 
