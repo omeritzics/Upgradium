@@ -1,6 +1,6 @@
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
-Update your Android apps directly from the APK source. Forked from [Obtainium](https://github.com/ImranR98/Obtainium) due to the developer's problematic political views and his terrible behaviour toward Jews who wanted to contribute to his app.
+Update your Android apps directly from the APK source. Forked from [Updatium](https://github.com/ImranR98/Updatium) due to the developer's problematic political views and his terrible behaviour toward Jews who wanted to contribute to his app.
 
 Updatium allows you to install and update apps directly from their releases pages, and receive notifications when new releases are made available.
 
