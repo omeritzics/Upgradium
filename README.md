@@ -1,4 +1,4 @@
-[![Download Nightly](https://img.shields.io/badge/Download-Nightly-blue?style=for-the-badge&logo=android)](https://github.com/omeritzics/Updatium/releases/tag/nightly-build)
+[![Download Nightly](https://img.shields.io/badge/Download-Nightly-blue?style=for-the-badge&logo=android)](https://github.com/omeritzics/Updatium/releases/tag/nightly-build) (Note: Updatium is still not ready to function as an independant app, this is a work in progress)
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
 Update your Android apps directly from the APK source. Forked from [Updatium](https://github.com/ImranR98/Updatium) due to the developer's problematic political views and his terrible behaviour toward Jews who wanted to contribute to his app.
