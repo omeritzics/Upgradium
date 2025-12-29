@@ -962,16 +962,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     IconButton(
                       onPressed: () {
                         launchUrlString(
-                          'https://wiki.obtainium.imranr.dev/',
-                          mode: LaunchMode.externalApplication,
-                        );
-                      },
-                      icon: const Icon(Icons.help_outline_rounded),
-                      tooltip: tr('wiki'),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        launchUrlString(
                           'https://apps.obtainium.imranr.dev/',
                           mode: LaunchMode.externalApplication,
                         );

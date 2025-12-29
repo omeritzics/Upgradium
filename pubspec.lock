@@ -24,7 +24,7 @@ packages:
       path: "."
       ref: master
       resolved-ref: "18231a8a2343747440b0bfe90f7d56ef7f586099"
-      url: "https://github.com/nsNeruno/android_package_manager"
+      url: "https://github.com/omeritzics/android_package_manager"
     source: git
     version: "0.7.1"
   android_system_font:
