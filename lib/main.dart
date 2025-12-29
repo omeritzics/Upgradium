@@ -318,9 +318,9 @@ class _UpdatiumState extends State<Updatium> {
                 if (value?.versionName != null) {
                   appsProvider.saveApps([
                     App(
-                      obtainiumId,
-                      obtainiumUrl,
-                      'ImranR98',
+                      updatiumId,
+                      updatiumUrl,
+                      'omeritzics',
                       'Updatium',
                       value!.versionName,
                       value.versionName!,

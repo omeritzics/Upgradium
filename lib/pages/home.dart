@@ -79,12 +79,12 @@ class _HomePageState extends State<HomePage> {
                   GestureDetector(
                     onTap: () {
                       launchUrlString(
-                        'https://github.com/ImranR98/Updatium/blob/main/README.md',
+                        'https://github.com/omeritzics/Updatium/blob/main/README.md',
                         mode: LaunchMode.externalApplication,
                       );
                     },
                     child: Text(
-                      'https://github.com/ImranR98/Updatium/blob/main/README.md',
+                      'https://github.com/omeritzics/Updatium/blob/main/README.md',
                       style: const TextStyle(
                         decoration: TextDecoration.underline,
                         fontWeight: FontWeight.bold,
