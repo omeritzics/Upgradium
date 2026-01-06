@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-06 13:07+0000\n"
+"POT-Creation-Date: 2026-01-06 18:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgid "changes"
 msgstr ""
 
 #: lib/pages/app.dart:247 lib/pages/apps.dart:1096
-#: lib/providers/apps_provider.dart:2224
+#: lib/providers/apps_provider.dart:2222
 msgid "releaseAsset"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 
 #: lib/pages/app.dart:593 lib/pages/apps.dart:920
 #: lib/components/generated_form_modal.dart:93
-#: lib/providers/apps_provider.dart:2272 lib/providers/apps_provider.dart:2320
+#: lib/providers/apps_provider.dart:2270 lib/providers/apps_provider.dart:2318
 msgid "continue"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ""
 
 #: lib/pages/settings.dart:141 lib/pages/settings.dart:183
 #: lib/pages/import_export.dart:518 lib/pages/import_export.dart:959
-#: lib/pages/add_app.dart:316 lib/providers/apps_provider.dart:2224
+#: lib/pages/add_app.dart:316 lib/providers/apps_provider.dart:2222
 msgid "selectX"
 msgstr ""
 
@@ -385,7 +385,7 @@ msgstr ""
 msgid "appLogs"
 msgstr ""
 
-#: lib/pages/settings.dart:1053 lib/providers/apps_provider.dart:1852
+#: lib/pages/settings.dart:1053 lib/providers/apps_provider.dart:1850
 msgid "removeFromUpdatium"
 msgstr ""
 
@@ -542,7 +542,7 @@ msgid "filter"
 msgstr ""
 
 #: lib/pages/import_export.dart:942 lib/components/generated_form_modal.dart:74
-#: lib/providers/apps_provider.dart:2265 lib/providers/apps_provider.dart:2313
+#: lib/providers/apps_provider.dart:2263 lib/providers/apps_provider.dart:2311
 msgid "cancel"
 msgstr ""
 
@@ -707,7 +707,7 @@ msgid "releaseDateAsVersionExplanation"
 msgstr ""
 
 #: lib/pages/add_app.dart:215 lib/providers/source_provider.dart:1316
-#: lib/providers/apps_provider.dart:2180
+#: lib/providers/apps_provider.dart:2178
 msgid "appAlreadyAdded"
 msgstr ""
 
@@ -961,7 +961,7 @@ msgstr ""
 msgid "and"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:251 lib/providers/apps_provider.dart:2108
+#: lib/providers/apps_provider.dart:251 lib/providers/apps_provider.dart:2106
 #: lib/custom_errors.dart:132
 msgid "unexpectedError"
 msgstr ""
@@ -982,31 +982,31 @@ msgstr ""
 msgid "appNotFound"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:1859
+#: lib/providers/apps_provider.dart:1857
 msgid "uninstallFromDevice"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:2225
+#: lib/providers/apps_provider.dart:2223
 msgid "pickAnAPK"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:2231
+#: lib/providers/apps_provider.dart:2229
 msgid "appHasMoreThanOnePackage"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:2251
+#: lib/providers/apps_provider.dart:2249
 msgid "deviceSupportsXArch"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:2252
+#: lib/providers/apps_provider.dart:2250
 msgid "deviceSupportsFollowingArchs"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:2298
+#: lib/providers/apps_provider.dart:2296
 msgid "warning"
 msgstr ""
 
-#: lib/providers/apps_provider.dart:2301
+#: lib/providers/apps_provider.dart:2299
 msgid "sourceIsXButPackageFromYPrompt"
 msgstr ""
 
