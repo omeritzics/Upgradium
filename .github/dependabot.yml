@@ -1,12 +1,36 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
+# Dependabot configuration file for Updatium
 version: 2
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # 1. Fetch updates for Flutter/Dart packages (pub.dev)
+  - package-ecosystem: "pub"
+    directory: "/" # Location of your pubspec.yaml
     schedule:
       interval: "weekly"
- 
+      day: "sunday"
+      time: "09:00"
+    timezone: "Israel" # Optional: set to your local time
+    open-pull-requests-limit: 5 # Avoid getting overwhelmed by too many PRs
+    labels:
+      - "dependencies"
+      - "flutter"
+
+  # 2. Fetch updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "github_actions"
+
+  # 3. (Optional) Fetch updates for Gradle (Android specific)
+  - package-ecosystem: "gradle"
+    directory: "/android"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 2
+    labels:
+      - "dependencies"
+      - "android"
