@@ -53,7 +53,7 @@ jobs:
           ls -l ./build/app/outputs/flutter-apk/
 
       - name: Save Unsigned APKs as Action Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           path: build/app/outputs/flutter-apk/*
 
