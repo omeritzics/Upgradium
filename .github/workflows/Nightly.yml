@@ -26,6 +26,8 @@ jobs:
           swap-storage: true
 
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures full history for git dependencies
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -37,18 +39,21 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - name: Get Dependencies
-        run: flutter pub get
+        run: |
+          flutter pub cache repair
+          flutter pub get
 
       - name: Build APK (Debug Mode)
         run: |
           # Disable signing configuration for debug build
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
+          
           flutter build apk --debug --flavor normal
           
-          # IMPORTANT: Rename the output file so the next steps can find it explicitly
-          # Flutter's default output is app-normal-debug.apk
+          # Rename for clarity and easy discovery by the next steps
           mkdir -p build/outputs/
           cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
 
@@ -56,7 +61,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Updatium-Debug-APK
-          # Point to the specific renamed file
           path: build/outputs/updatium-nightly-debug.apk
 
       - name: Create Release
@@ -64,10 +68,8 @@ jobs:
         with:
           tag_name: nightly-build
           name: "Updatium Nightly"
-          # Using fixed path to the renamed file
           files: build/outputs/updatium-nightly-debug.apk
           prerelease: true
-          # Add this to ensure the existing nightly release is updated
-          overwrite: true
+          overwrite: true # Ensures the same tag is updated with the new APK
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
