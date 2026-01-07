@@ -13,7 +13,7 @@ dependencies:
   
   # --- Localization (PO Support) ---
   easy_localization: ^3.0.7
-  easy_localization_loader: ^1.0.1
+  easy_localization_loader: ^2.0.0
   
   # --- UI & Icons ---
   cupertino_icons: ^1.0.8
