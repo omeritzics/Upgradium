@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      # Clean up disk space to avoid "no space left on device" errors
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -25,47 +26,58 @@ jobs:
           docker-images: true
           swap-storage: true
 
+      # Checkout the repository with full history for git dependencies
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      # Set up Java environment required for Android builds
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # Set up Flutter environment and enable caching
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
 
-      - name: Update Gradle Wrapper to 8.13
+      # Force update the Gradle version to 8.13 to satisfy plugin requirements
+      - name: Force Update Gradle Wrapper to 8.13
         run: |
-          sed -i 's/gradle-8.12-bin.zip/gradle-8.13-bin.zip/g' android/gradle/wrapper/gradle-wrapper.properties || true
+          sed -i 's/gradle-[0-9.]\+-bin.zip/gradle-8.13-bin.zip/g' android/gradle/wrapper/gradle-wrapper.properties
+          echo "Current gradle-wrapper.properties:"
+          cat android/gradle/wrapper/gradle-wrapper.properties
 
+      # Get Flutter dependencies and repair cache if needed
       - name: Get Dependencies
         run: |
           flutter pub cache repair
           flutter pub get
 
+      # Build the debug APK and disable release signing configurations
       - name: Build APK (Debug Mode)
         run: |
-          # ביטול הגדרות חתימה כדי לאפשר בניית דיבאג ב-Runner
+          # Remove signingConfig from build.gradle files to allow unsigned debug builds
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
           flutter build apk --debug --flavor normal
           
+          # Create a dedicated output directory and copy the APK
           mkdir -p build/outputs/
           cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-nightly-debug.apk
 
+      # Upload the built APK as a workflow artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Updatium-Debug-APK
           path: build/outputs/updatium-nightly-debug.apk
 
+      # Create or update a GitHub Release for the nightly build
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
