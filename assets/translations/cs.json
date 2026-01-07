@@ -208,7 +208,7 @@
     "storagePermissionDenied": "Oprávnění k ukládání odepřeno",
     "selectedCategorizeWarning": "Toto nahradí všechna stávající nastavení kategorií pro vybrané aplikace.",
     "filterAPKsByRegEx": "Filtrovat APK podle regulárního výrazu",
-    "removeFromUpdatium": "Odebrat z Obtainia",
+    "removeFromUpdatium": "Odebrat z Updatium",
     "uninstallFromDevice": "Odinstalovat ze zařízení",
     "onlyWorksWithNonVersionDetectApps": "Funguje pouze pro aplikace s vypnutou detekcí verze.",
     "releaseDateAsVersion": "Použít datum vydání jako verzi",
