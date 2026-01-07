@@ -65,47 +65,6 @@ class _HomePageState extends State<HomePage> {
     initDeepLinks();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       var sp = context.read<SettingsProvider>();
-      if (!sp.welcomeShown) {
-        await showDialog(
-          context: context,
-          builder: (BuildContext ctx) {
-            return AlertDialog(
-              title: Text(tr('welcome')),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 20,
-                children: [
-                  Text(tr('documentationLinksNote')),
-                  GestureDetector(
-                    onTap: () {
-                      launchUrlString(
-                        'https://github.com/omeritzics/Updatium/blob/main/README.md',
-                        mode: LaunchMode.externalApplication,
-                      );
-                    },
-                    child: Text(
-                      'https://github.com/omeritzics/Updatium/blob/main/README.md',
-                      style: const TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    sp.welcomeShown = true;
-                    Navigator.of(context).pop(null);
-                  },
-                  child: Text(tr('ok')),
-                ),
-              ],
-            );
-          },
-        );
-      }
       if (!sp.googleVerificationWarningShown &&
           DateTime.now().year >=
               2026 /* Gives some time to translators between now and Jan */ ) {
