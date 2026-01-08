@@ -16,7 +16,7 @@ import 'package:shared_storage/shared_storage.dart' as saf;
 String updatiumTempId = 'omeritzics_updatium_${GitHub().hosts[0]}';
 String updatiumId = 'com.omeritzics.updatium';
 String updatiumUrl = 'https://github.com/omeritzics/Updatium';
-Color updatiumThemeColor = const Color(0xFF6438B5);
+Color updatiumThemeColor = const Color(0xFF3a79b7);
 
 enum ThemeSettings { system, light, dark }
 

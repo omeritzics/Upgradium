@@ -18,10 +18,10 @@
                     android:endY="152.5006"
                     android:tileMode="clamp">
                     <item
-                        android:color="#9B58DC"
+                        android:color="#58b0dc"
                         android:offset="0" />
                     <item
-                        android:color="#321C92"
+                        android:color="#1c4392"
                         android:offset="1" />
                 </gradient>
             </aapt:attr>
@@ -34,10 +34,10 @@
                     android:endY="152.5006"
                     android:tileMode="clamp">
                     <item
-                        android:color="#9B58DC"
+                        android:color="#58b0dc"
                         android:offset="0" />
                     <item
-                        android:color="#321C92"
+                        android:color="#1c4392"
                         android:offset="1" />
                 </gradient>
             </aapt:attr>
