@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:html/parser.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/providers/source_provider.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/providers/source_provider.dart';
 
 class APKCombo extends AppSource {
   APKCombo() {
@@ -50,7 +50,7 @@ class APKCombo extends AppSource {
   ) async {
     var res = await sourceRequest('$standardUrl/download/apk', {});
     if (res.statusCode != 200) {
-      throw getUpdatiumHttpError(res);
+      throw getObtainiumHttpError(res);
     }
     var html = parse(res.body);
     return html
@@ -106,7 +106,7 @@ class APKCombo extends AppSource {
     String appId = (await tryInferringAppId(standardUrl))!;
     var preres = await sourceRequest(standardUrl, additionalSettings);
     if (preres.statusCode != 200) {
-      throw getUpdatiumHttpError(preres);
+      throw getObtainiumHttpError(preres);
     }
     var res = parse(preres.body);
     String? version = res.querySelector('div.version')?.text.trim();

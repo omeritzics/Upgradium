@@ -1,9 +1,9 @@
 import 'package:html/parser.dart';
 import 'package:http/http.dart';
-import 'package:updatium/app_sources/html.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/providers/source_provider.dart';
-import 'package:updatium/components/generated_form.dart';
+import 'package:obtainium/app_sources/html.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/providers/source_provider.dart';
+import 'package:obtainium/components/generated_form.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class SourceHut extends AppSource {
@@ -86,15 +86,14 @@ class SourceHut extends AppSource {
         String? releaseDateString = entry.querySelector('pubDate')?.innerHtml;
         DateTime? releaseDate;
         try {
-          if (releaseDateString != null) {
-            try {
-              releaseDate = DateFormat('E, dd MMM yyyy HH:mm:ss Z')
-                  .parse(releaseDateString);
-            } catch (_) {
-              releaseDate = DateFormat('EEE, dd MMM yyyy HH:mm:ss Z')
-                  .parse(releaseDateString);
-            }
-          }
+          releaseDate = releaseDateString != null
+              ? DateFormat('E, dd MMM yyyy HH:mm:ss Z').parse(releaseDateString)
+              : null;
+          releaseDate = releaseDateString != null
+              ? DateFormat(
+                  'EEE, dd MMM yyyy HH:mm:ss Z',
+                ).parse(releaseDateString)
+              : null;
         } catch (e) {
           // ignore
         }
@@ -137,7 +136,7 @@ class SourceHut extends AppSource {
       }
       return apkDetailsList.first;
     } else {
-      throw getUpdatiumHttpError(res);
+      throw getObtainiumHttpError(res);
     }
   }
 }

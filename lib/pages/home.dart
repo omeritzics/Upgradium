@@ -5,14 +5,14 @@ import 'package:app_links/app_links.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:updatium/components/generated_form_modal.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/pages/add_app.dart';
-import 'package:updatium/pages/apps.dart';
-import 'package:updatium/pages/import_export.dart';
-import 'package:updatium/pages/settings.dart';
-import 'package:updatium/providers/apps_provider.dart';
-import 'package:updatium/providers/settings_provider.dart';
+import 'package:obtainium/components/generated_form_modal.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/pages/add_app.dart';
+import 'package:obtainium/pages/apps.dart';
+import 'package:obtainium/pages/import_export.dart';
+import 'package:obtainium/pages/settings.dart';
+import 'package:obtainium/providers/apps_provider.dart';
+import 'package:obtainium/providers/settings_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -65,6 +65,47 @@ class _HomePageState extends State<HomePage> {
     initDeepLinks();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       var sp = context.read<SettingsProvider>();
+      if (!sp.welcomeShown) {
+        await showDialog(
+          context: context,
+          builder: (BuildContext ctx) {
+            return AlertDialog(
+              title: Text(tr('welcome')),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                spacing: 20,
+                children: [
+                  Text(tr('documentationLinksNote')),
+                  GestureDetector(
+                    onTap: () {
+                      launchUrlString(
+                        'https://github.com/ImranR98/Obtainium/blob/main/README.md',
+                        mode: LaunchMode.externalApplication,
+                      );
+                    },
+                    child: Text(
+                      'https://github.com/ImranR98/Obtainium/blob/main/README.md',
+                      style: const TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    sp.welcomeShown = true;
+                    Navigator.of(context).pop(null);
+                  },
+                  child: Text(tr('ok')),
+                ),
+              ],
+            );
+          },
+        );
+      }
       if (!sp.googleVerificationWarningShown &&
           DateTime.now().year >=
               2026 /* Gives some time to translators between now and Jan */ ) {
@@ -180,7 +221,7 @@ class _HomePageState extends State<HomePage> {
             );
           }
         } else {
-          throw UpdatiumError(tr('unknown'));
+          throw ObtainiumError(tr('unknown'));
         }
       } catch (e) {
         showError(e, context);

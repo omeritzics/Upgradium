@@ -1,14 +1,14 @@
 // Exposes functions that can be used to send notifications to the user
-// Contains a set of pre-defined UpdatiumNotification objects that should be used throughout the app
+// Contains a set of pre-defined ObtainiumNotification objects that should be used throughout the app
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:updatium/main.dart';
-import 'package:updatium/providers/settings_provider.dart';
-import 'package:updatium/providers/source_provider.dart';
+import 'package:obtainium/main.dart';
+import 'package:obtainium/providers/settings_provider.dart';
+import 'package:obtainium/providers/source_provider.dart';
 
-class UpdatiumNotification {
+class ObtainiumNotification {
   late int id;
   late String title;
   late String message;
@@ -20,7 +20,7 @@ class UpdatiumNotification {
   bool onlyAlertOnce;
   String? payload;
 
-  UpdatiumNotification(
+  ObtainiumNotification(
     this.id,
     this.title,
     this.message,
@@ -34,7 +34,7 @@ class UpdatiumNotification {
   });
 }
 
-class UpdateNotification extends UpdatiumNotification {
+class UpdateNotification extends ObtainiumNotification {
   UpdateNotification(List<App> updates, {int? id})
     : super(
         id ?? 2,
@@ -57,7 +57,7 @@ class UpdateNotification extends UpdatiumNotification {
   }
 }
 
-class SilentUpdateNotification extends UpdatiumNotification {
+class SilentUpdateNotification extends ObtainiumNotification {
   SilentUpdateNotification(List<App> updates, bool succeeded, {int? id})
     : super(
         id ?? 3,
@@ -81,7 +81,7 @@ class SilentUpdateNotification extends UpdatiumNotification {
   }
 }
 
-class SilentUpdateAttemptNotification extends UpdatiumNotification {
+class SilentUpdateAttemptNotification extends ObtainiumNotification {
   SilentUpdateAttemptNotification(List<App> updates, {int? id})
     : super(
         id ?? 3,
@@ -105,7 +105,7 @@ class SilentUpdateAttemptNotification extends UpdatiumNotification {
   }
 }
 
-class ErrorCheckingUpdatesNotification extends UpdatiumNotification {
+class ErrorCheckingUpdatesNotification extends ObtainiumNotification {
   ErrorCheckingUpdatesNotification(String error, {int? id})
     : super(
         id ?? 5,
@@ -119,7 +119,7 @@ class ErrorCheckingUpdatesNotification extends UpdatiumNotification {
       );
 }
 
-class AppsRemovedNotification extends UpdatiumNotification {
+class AppsRemovedNotification extends ObtainiumNotification {
   AppsRemovedNotification(List<List<String>> namedReasons)
     : super(
         6,
@@ -138,7 +138,7 @@ class AppsRemovedNotification extends UpdatiumNotification {
   }
 }
 
-class DownloadNotification extends UpdatiumNotification {
+class DownloadNotification extends ObtainiumNotification {
   DownloadNotification(String appName, int progPercent)
     : super(
         appName.hashCode,
@@ -153,7 +153,7 @@ class DownloadNotification extends UpdatiumNotification {
       );
 }
 
-class DownloadedNotification extends UpdatiumNotification {
+class DownloadedNotification extends ObtainiumNotification {
   DownloadedNotification(String fileName, String downloadUrl)
     : super(
         downloadUrl.hashCode,
@@ -166,17 +166,17 @@ class DownloadedNotification extends UpdatiumNotification {
       );
 }
 
-final completeInstallationNotification = UpdatiumNotification(
+final completeInstallationNotification = ObtainiumNotification(
   1,
   tr('completeAppInstallation'),
-  tr('updatiumMustBeOpenToInstallApps'),
+  tr('obtainiumMustBeOpenToInstallApps'),
   'COMPLETE_INSTALL',
   tr('completeAppInstallationNotifChannel'),
   tr('completeAppInstallationNotifDescription'),
   Importance.max,
 );
 
-class CheckingUpdatesNotification extends UpdatiumNotification {
+class CheckingUpdatesNotification extends ObtainiumNotification {
   CheckingUpdatesNotification(String appName)
     : super(
         4,
@@ -292,7 +292,7 @@ class NotificationsProvider {
           channelDescription: channelDescription,
           importance: importance,
           priority: importanceToPriority[importance]!,
-          groupKey: '$updatiumId.$channelCode',
+          groupKey: '$obtainiumId.$channelCode',
           progress: progPercent ?? 0,
           maxProgress: 100,
           showProgress: progPercent != null,
@@ -305,7 +305,7 @@ class NotificationsProvider {
   }
 
   Future<void> notify(
-    UpdatiumNotification notif, {
+    ObtainiumNotification notif, {
     bool cancelExisting = false,
   }) => notifyRaw(
     notif.id,

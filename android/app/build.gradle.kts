@@ -28,7 +28,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.omeritzics.updatium"
+    namespace = "dev.imranr.obtainium"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973" // 'flutter.ndkVersion' produces warnings (TODO can/should we switch back?)
 
@@ -38,8 +38,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
     defaultConfig {
-        applicationId = "com.omeritzics.updatium"
+        applicationId = "dev.imranr.obtainium"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24

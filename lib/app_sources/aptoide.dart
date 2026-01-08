@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/providers/source_provider.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/providers/source_provider.dart';
 
 class Aptoide extends AppSource {
   Aptoide() {
@@ -43,7 +43,7 @@ class Aptoide extends AppSource {
   ) async {
     var res = await sourceRequest(standardUrl, additionalSettings);
     if (res.statusCode != 200) {
-      throw getUpdatiumHttpError(res);
+      throw getObtainiumHttpError(res);
     }
     var idMatch = RegExp('"app":{"id":[0-9]+').firstMatch(res.body);
     String? id;
@@ -57,7 +57,7 @@ class Aptoide extends AppSource {
       additionalSettings,
     );
     if (res2.statusCode != 200) {
-      throw getUpdatiumHttpError(res);
+      throw getObtainiumHttpError(res);
     }
     return jsonDecode(res2.body)?['nodes']?['meta']?['data'];
   }

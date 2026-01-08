@@ -10,36 +10,36 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:html/dom.dart';
 import 'package:http/http.dart';
-import 'package:updatium/app_sources/apkmirror.dart';
-import 'package:updatium/app_sources/apkpure.dart';
-import 'package:updatium/app_sources/aptoide.dart';
-import 'package:updatium/app_sources/codeberg.dart';
-import 'package:updatium/app_sources/coolapk.dart';
-import 'package:updatium/app_sources/directAPKLink.dart';
-import 'package:updatium/app_sources/farsroid.dart';
-import 'package:updatium/app_sources/fdroid.dart';
-import 'package:updatium/app_sources/fdroidrepo.dart';
-import 'package:updatium/app_sources/github.dart';
-import 'package:updatium/app_sources/gitlab.dart';
-import 'package:updatium/app_sources/huaweiappgallery.dart';
-import 'package:updatium/app_sources/izzyondroid.dart';
-import 'package:updatium/app_sources/html.dart';
-import 'package:updatium/app_sources/jenkins.dart';
-import 'package:updatium/app_sources/liteapks.dart';
-import 'package:updatium/app_sources/moddroid.dart';
-import 'package:updatium/app_sources/neutroncode.dart';
-import 'package:updatium/app_sources/rustore.dart';
-import 'package:updatium/app_sources/sourceforge.dart';
-import 'package:updatium/app_sources/sourcehut.dart';
-import 'package:updatium/app_sources/telegramapp.dart';
-import 'package:updatium/app_sources/tencent.dart';
-import 'package:updatium/app_sources/uptodown.dart';
-import 'package:updatium/app_sources/vivoappstore.dart';
-import 'package:updatium/components/generated_form.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/mass_app_sources/githubstars.dart';
-import 'package:updatium/providers/logs_provider.dart';
-import 'package:updatium/providers/settings_provider.dart';
+import 'package:obtainium/app_sources/apkmirror.dart';
+import 'package:obtainium/app_sources/apkpure.dart';
+import 'package:obtainium/app_sources/aptoide.dart';
+import 'package:obtainium/app_sources/codeberg.dart';
+import 'package:obtainium/app_sources/coolapk.dart';
+import 'package:obtainium/app_sources/directAPKLink.dart';
+import 'package:obtainium/app_sources/farsroid.dart';
+import 'package:obtainium/app_sources/fdroid.dart';
+import 'package:obtainium/app_sources/fdroidrepo.dart';
+import 'package:obtainium/app_sources/github.dart';
+import 'package:obtainium/app_sources/gitlab.dart';
+import 'package:obtainium/app_sources/huaweiappgallery.dart';
+import 'package:obtainium/app_sources/izzyondroid.dart';
+import 'package:obtainium/app_sources/html.dart';
+import 'package:obtainium/app_sources/jenkins.dart';
+import 'package:obtainium/app_sources/liteapks.dart';
+import 'package:obtainium/app_sources/moddroid.dart';
+import 'package:obtainium/app_sources/neutroncode.dart';
+import 'package:obtainium/app_sources/rustore.dart';
+import 'package:obtainium/app_sources/sourceforge.dart';
+import 'package:obtainium/app_sources/sourcehut.dart';
+import 'package:obtainium/app_sources/telegramapp.dart';
+import 'package:obtainium/app_sources/tencent.dart';
+import 'package:obtainium/app_sources/uptodown.dart';
+import 'package:obtainium/app_sources/vivoappstore.dart';
+import 'package:obtainium/components/generated_form.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/mass_app_sources/githubstars.dart';
+import 'package:obtainium/providers/logs_provider.dart';
+import 'package:obtainium/providers/settings_provider.dart';
 
 class AppNames {
   late String author;
@@ -74,7 +74,7 @@ List<MapEntry<String, String>> assumed2DlistToStringMapList(
   List<dynamic> arr,
 ) => arr.map((e) => MapEntry(e[0] as String, e[1] as String)).toList();
 
-// App JSON schema has changed multiple times over the many versions of Updatium
+// App JSON schema has changed multiple times over the many versions of Obtainium
 // This function takes an App JSON and modifies it if needed to conform to the latest (current) version
 Map<String, dynamic> appJSONCompatibilityModifiers(Map<String, dynamic> json) {
   var source = SourceProvider().getSource(
@@ -592,7 +592,7 @@ sourceRequestStreamResponse(
 
     return MapEntry(currentUrl, MapEntry(httpClient, response));
   }
-  throw UpdatiumError('Too many redirects ($maxRedirects)');
+  throw ObtainiumError('Too many redirects ($maxRedirects)');
 }
 
 Future<Response> httpClientResponseStreamToFinalResponse(
@@ -988,8 +988,8 @@ abstract class AppSource {
   }
 }
 
-UpdatiumError getUpdatiumHttpError(Response res) {
-  return UpdatiumError(
+ObtainiumError getObtainiumHttpError(Response res) {
+  return ObtainiumError(
     (res.reasonPhrase != null &&
             res.reasonPhrase != null &&
             res.reasonPhrase!.isNotEmpty)
@@ -1313,7 +1313,7 @@ class SourceProvider {
     for (var url in urls) {
       try {
         if (alreadyAddedUrls.contains(url)) {
-          throw UpdatiumError(tr('appAlreadyAdded'));
+          throw ObtainiumError(tr('appAlreadyAdded'));
         }
         var source = sourceOverride ?? getSource(url);
         apps.add(

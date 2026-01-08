@@ -1,7 +1,7 @@
 import 'package:html/parser.dart';
 import 'package:http/http.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/providers/source_provider.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/providers/source_provider.dart';
 
 class SourceForge extends AppSource {
   SourceForge() {
@@ -123,7 +123,7 @@ class SourceForge extends AppSource {
         AppNames(name, segments[segments.indexOf('files') - 1]),
       );
     } else {
-      throw getUpdatiumHttpError(res);
+      throw getObtainiumHttpError(res);
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/providers/source_provider.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/providers/source_provider.dart';
 
 class HuaweiAppGallery extends AppSource {
   HuaweiAppGallery() {
@@ -41,7 +41,7 @@ class HuaweiAppGallery extends AppSource {
         res.statusCode == 304) {
       return res;
     } else {
-      throw getUpdatiumHttpError(res);
+      throw getObtainiumHttpError(res);
     }
   }
 

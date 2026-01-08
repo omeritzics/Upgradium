@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.omeritzics.updatium">
+    package="dev.imranr.obtainium">
     <application
         android:label="@string/label"
         android:name="${applicationName}"
@@ -38,7 +38,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="updatium" />
+                <data android:scheme="obtainium" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
@@ -66,7 +66,7 @@
             android:foregroundServiceType="specialUse"
             android:exported="false" />
         <meta-data
-            android:name="com.omeritzics.updatium.service.NOTIFICATION_ICON"
+            android:name="dev.imranr.obtainium.service.NOTIFICATION_ICON"
             android:resource="@drawable/ic_notification" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />

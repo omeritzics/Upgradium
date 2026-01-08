@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:updatium/custom_errors.dart';
-import 'package:updatium/providers/source_provider.dart';
+import 'package:obtainium/custom_errors.dart';
+import 'package:obtainium/providers/source_provider.dart';
 
 class LiteAPKs extends AppSource {
   LiteAPKs() {
@@ -73,7 +73,7 @@ class LiteAPKs extends AppSource {
       additionalSettings,
     );
     if (res1.statusCode != 200) {
-      throw getUpdatiumHttpError(res1);
+      throw getObtainiumHttpError(res1);
     }
 
     var liteAppId = jsonDecode(res1.body)[0]['id'];
@@ -86,7 +86,7 @@ class LiteAPKs extends AppSource {
       additionalSettings,
     );
     if (res2.statusCode != 200) {
-      throw getUpdatiumHttpError(res2);
+      throw getObtainiumHttpError(res2);
     }
     var json = jsonDecode(res2.body);
 

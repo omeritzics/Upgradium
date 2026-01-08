@@ -3,6 +3,8 @@ allprojects {
         google()
         mavenCentral()
         maven {
+            // [required] background_fetch
+            url = uri("${project(":background_fetch").projectDir}/libs")
         }
     }
 }
