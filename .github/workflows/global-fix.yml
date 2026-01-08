@@ -1,0 +1,68 @@
+name: Global Repository Fix (One-Time)
+
+on:
+  workflow_dispatch: # This allows you to trigger it manually from the Actions tab
+
+jobs:
+  fix-all-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      # 1. Checkout the repository with all branches
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history and branches
+
+      # 2. Setup Flutter (needed for 'pub get' verification)
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      # 3. Global Fix Script
+      - name: Fix and Push All Branches
+        run: |
+          # Set git identity
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+
+          # Get all remote branches (excluding HEAD and tags)
+          BRANCHES=$(git branch -r | grep -v '\->' | sed 's/origin\///')
+
+          for branch in $BRANCHES; do
+            echo "------------------------------------------------"
+            echo "Processing branch: $branch"
+            echo "------------------------------------------------"
+            
+            git checkout $branch
+            
+            # Execute the fix logic
+            # 1. SDK constraint
+            sed -i 's/sdk: ">=2.7.0 <3.0.0"/sdk: ">=3.0.0 <4.0.0"/g' pubspec.yaml || true
+            
+            # 2. Inject Overrides if missing
+            if ! grep -q "dependency_overrides:" pubspec.yaml; then
+                printf "\ndependency_overrides:\n  web: ^1.0.0\n  connectivity_plus: ^6.0.3\n  battery_plus: ^6.2.2\n" >> pubspec.yaml
+            fi
+
+            # 3. Infrastructure fix
+            mkdir -p android/gradle/wrapper
+            printf "distributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
+            
+            if [ -f "android/app/build.gradle.kts" ]; then
+                sed -i 's/jvmTarget = JavaVersion.VERSION_11.toString()/kotlinOptions.jvmTarget = "11"/g' android/app/build.gradle.kts || true
+            fi
+
+            # Check if there are changes
+            if [ -n "$(git status --porcelain)" ]; then
+              echo "Changes detected on $branch. Committing..."
+              git add .
+              git commit -m "chore: global automated dependency and infrastructure fix"
+              git push origin $branch
+            else
+              echo "No changes needed for $branch."
+            fi
+          done
