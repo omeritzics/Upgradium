@@ -33,7 +33,7 @@ Currently supported App sources:
 - Direct APK Link
 - "HTML" (Fallback): Any other URL that returns an HTML page with links to APK files
 ## Download
-[![Download Nightly APK](https://img.shields.io/badge/Download-Nightly_APK-green?style=for-the-badge&logo=android)](https://github.com/USERNAME/REPOSITORY/releases/tag/nightly-build)
+[![Download Nightly APK](https://img.shields.io/badge/Download-Nightly_APK-green?style=for-the-badge&logo=android)](https://github.com/omeritzics/Updatium/releases/tag/nightly-build)
 
 ## Limitations
 - For some sources, data is gathered using Web scraping and can easily break due to changes in website design. In such cases, more reliable methods may be unavailable.
