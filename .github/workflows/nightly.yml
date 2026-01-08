@@ -46,7 +46,7 @@ jobs:
           channel: stable
           cache: true
 
-      # Step 5: Force Infrastructure Fixes (Gradle 8.13)
+      # Step 5: Infrastructure Fixes (Gradle 8.13)
       - name: Force Update Gradle Wrapper to 8.13
         run: |
           mkdir -p android/gradle/wrapper
@@ -55,15 +55,21 @@ jobs:
       # Step 6: Fix Kotlin Syntax
       - name: Fix Kotlin jvmTarget Syntax
         run: |
-          # Removing the problematic jvmTarget line to let Gradle use defaults
           sed -i 's/jvmTarget = JavaVersion.VERSION_11.toString()//g' android/app/build.gradle.kts || true
           sed -i 's/kotlinOptions.jvmTarget = "11"//g' android/app/build.gradle.kts || true
 
-      # Step 7: Environment & Dependencies
-      - name: Get Dependencies
+      # Step 7: Resolve Dependency Conflicts
+      # We force specific versions that are compatible with each other
+      - name: Resolve Package Conflicts
         run: |
-          # Adding missing localization loader manually to help the build if it was removed
-          flutter pub add easy_localization_loader
+          # 1. Update SDK constraints in pubspec.yaml to support Null Safety (3.0.0+)
+          sed -i 's/sdk: ">=2.7.0 <3.0.0"/sdk: ">=3.0.0 <4.0.0"/g' pubspec.yaml || true
+          
+          # 2. Downgrade connectivity_plus to a version compatible with easy_localization_loader
+          flutter pub add connectivity_plus:6.0.3
+          flutter pub add easy_localization_loader:2.0.2
+          
+          # 3. Finalize dependencies
           flutter pub get
 
       # Step 8: Build APK
@@ -72,7 +78,7 @@ jobs:
           # Disable signing configuration
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
-          # Attempting build - this will still fail until main.dart is fixed
+          # Attempting build
           flutter build apk --debug --flavor normal
           
           mkdir -p build/outputs/
