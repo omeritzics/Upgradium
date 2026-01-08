@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Free space to prevent storage issues
+      # Step 1: Maximize disk space
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -26,7 +26,7 @@ jobs:
           docker-images: true
           swap-storage: true
 
-      # Step 2: Checkout code
+      # Step 2: Checkout
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
@@ -46,28 +46,24 @@ jobs:
           channel: stable
           cache: true
 
-      # Step 5: Force Update Gradle Wrapper to 8.13
+      # Step 5: Force Infrastructure Fixes (Gradle 8.13)
       - name: Force Update Gradle Wrapper to 8.13
         run: |
           mkdir -p android/gradle/wrapper
           printf "distributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip" > android/gradle/wrapper/gradle-wrapper.properties
 
-      # Step 6: Fix Kotlin jvmTarget by removing the problematic block
-      # This sed command finds the kotlinOptions block and replaces it with a compatible version
+      # Step 6: Fix Kotlin Syntax
       - name: Fix Kotlin jvmTarget Syntax
         run: |
-          # We use a multi-line sed or simply replace the specific line with a comment if it fails
-          # This approach attempts to use the most basic compatibility mode
+          # Removing the problematic jvmTarget line to let Gradle use defaults
           sed -i 's/jvmTarget = JavaVersion.VERSION_11.toString()//g' android/app/build.gradle.kts || true
           sed -i 's/kotlinOptions.jvmTarget = "11"//g' android/app/build.gradle.kts || true
-          
-          # Injecting a clean compiler options block that works with Kotlin 2.0+
-          sed -i '/kotlinOptions {/a \        freeCompilerArgs += listOf("-Xjvm-default=all")' android/app/build.gradle.kts || true
 
-      # Step 7: Fetch dependencies
+      # Step 7: Environment & Dependencies
       - name: Get Dependencies
         run: |
-          flutter pub cache repair
+          # Adding missing localization loader manually to help the build if it was removed
+          flutter pub add easy_localization_loader
           flutter pub get
 
       # Step 8: Build APK
@@ -76,6 +72,7 @@ jobs:
           # Disable signing configuration
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
+          # Attempting build - this will still fail until main.dart is fixed
           flutter build apk --debug --flavor normal
           
           mkdir -p build/outputs/
