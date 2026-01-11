@@ -1267,133 +1267,24 @@ class AppsPageState extends State<AppsPage> {
     }
 
     getDisplayedList() {
-      if (settingsProvider.appsViewType == AppsViewType.grid) {
-        return SliverGrid(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200.0,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-            childAspectRatio: 0.8,
-          ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return getSingleAppGridTile(index);
-            },
-            childCount: listedApps.length,
-          ),
-        );
-      } else {
-        return settingsProvider.groupByCategory &&
-                !(listedCategories.isEmpty ||
-                    (listedCategories.length == 1 &&
-                        listedCategories[0] == null))
-            ? SliverList(
-                delegate: SliverChildBuilderDelegate((
-                  BuildContext context,
-                  int index,
-                ) {
-                  return getCategoryCollapsibleTile(index);
-                }, childCount: listedCategories.length),
-              )
-            : SliverList(
-                delegate: SliverChildBuilderDelegate((
-                  BuildContext context,
-                  int index,
-                ) {
-                  return getSingleAppHorizTile(index);
-                }, childCount: listedApps.length),
-              );
-      }
-    }
-
-    getSingleAppGridTile(int index) {
-      var hasUpdate =
-          listedApps[index].app.installedVersion != null &&
-          listedApps[index].app.installedVersion !=
-              listedApps[index].app.latestVersion;
-      return Card(
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: () {
-            if (selectedAppIds.isNotEmpty) {
-              toggleAppSelected(listedApps[index].app);
-            } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      AppPage(appId: listedApps[index].app.id),
-                ),
-              );
-            }
-          },
-          onLongPress: () {
-            toggleAppSelected(listedApps[index].app);
-          },
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      child: getAppIcon(index),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      listedApps[index].name,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      getVersionText(index),
-                      style: Theme.of(context).textTheme.bodySmall,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                ],
-              ),
-              if (hasUpdate)
-                Positioned(
-                  top: 4,
-                  right: 4,
-                  child: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.arrow_downward,
-                      color: Colors.white,
-                      size: 16,
-                    ),
-                  ),
-                ),
-              if (selectedAppIds.contains(listedApps[index].app.id))
-                Container(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-                  child: Center(
-                    child: Icon(
-                      Icons.check_circle,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      );
+      return settingsProvider.groupByCategory &&
+              !(listedCategories.isEmpty ||
+                  (listedCategories.length == 1 && listedCategories[0] == null))
+          ? SliverList(
+              delegate: SliverChildBuilderDelegate((
+                BuildContext context,
+                int index,
+              ) {
+                return getCategoryCollapsibleTile(index);
+              }, childCount: listedCategories.length),
+            )
+          : SliverList(
+              delegate: SliverChildBuilderDelegate((
+                BuildContext context,
+                int index,
+              ) {
+                return getSingleAppHorizTile(index);
+              }, childCount: listedApps.length),
     }
 
     return Scaffold(
@@ -1408,24 +1299,7 @@ class AppsPageState extends State<AppsPage> {
             physics: const AlwaysScrollableScrollPhysics(),
             controller: scrollController,
             slivers: <Widget>[
-              CustomAppBar(
-                title: tr('appsString'),
-                actions: [
-                  IconButton(
-                    icon: Icon(
-                      settingsProvider.appsViewType == AppsViewType.list
-                          ? Icons.grid_view
-                          : Icons.view_list,
-                    ),
-                    onPressed: () {
-                      settingsProvider.appsViewType =
-                          settingsProvider.appsViewType == AppsViewType.list
-                              ? AppsViewType.grid
-                              : AppsViewType.list;
-                    },
-                  ),
-                ],
-              ),
+              CustomAppBar(title: tr('appsString')),
               ...getLoadingWidgets(),
               getDisplayedList(),
             ],
