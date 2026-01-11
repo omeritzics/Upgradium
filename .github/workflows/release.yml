@@ -7,70 +7,50 @@ on:
     inputs:
       beta:
         type: boolean
-        description: Is beta?
+        description: "Is this a beta release?"
+        default: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
+
       - uses: actions/setup-java@v4
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
+          distribution: 'temurin'
           java-version: '21'
-
-      - name: Flutter Doctor
-        id: flutter_doctor
-        run: |
-          flutter doctor -v
-
-      - name: Check submodule
-        id: check_submodule
-        run: |
-          git checkout ${{ inputs.checkout }}
 
       - name: Extract Version
         id: extract_version      
         run: |
-          VERSION=$(grep -oP "^version: [^\+]+" pubspec.yaml | tail -c +10)
+          VERSION=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2 | cut -d '+' -f 1)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          if [ ${{ inputs.beta }} == true ]; then BETA=true; else BETA=false; fi
-          echo "beta=$BETA" >> $GITHUB_OUTPUT
-          TAG="v$VERSION"
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
+          echo "beta=${{ github.event.inputs.beta }}" >> $GITHUB_OUTPUT
 
       - name: Build APKs
         run: |
-          sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle.kts
-          flutter build apk --flavor normal && flutter build apk --split-per-abi --flavor normal
-          for file in build/app/outputs/flutter-apk/app-*normal*.apk*; do mv "$file" "${file//-normal/}"; done
-          flutter build apk --flavor fdroid -t lib/main_fdroid.dart && flutter build apk --split-per-abi --flavor fdroid -t lib/main_fdroid.dart
-          rm ./build/app/outputs/flutter-apk/*.sha1
-          cp ./sign.sh ./build/app/outputs/flutter-apk/
-          ls -l ./build/app/outputs/flutter-apk/
+          flutter build apk --flavor normal --release
+          flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
 
-      - name: Save Unsigned APKs as Action Artifacts
+      - name: Save APKs as Artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: build/app/outputs/flutter-apk/*
+          name: release-apks
+          path: build/app/outputs/flutter-apk/*.apk
 
-      - name: Create Tag
-        uses: mathieudutour/github-tag-action@v6.1
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
-          github_token: ${{ secrets.GH_ACCESS_TOKEN }}
-          custom_tag: "${{ steps.extract_version.outputs.tag }}"
-          tag_prefix: ""
-      
-      - name: Create Draft Release
-        uses: ncipollo/release-action@v1
-        with:
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
-          tag: "${{ steps.extract_version.outputs.tag }}"
-          prerelease: "${{ steps.extract_version.outputs.beta }}"
-          draft: "true"
-          generateReleaseNotes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ steps.extract_version.outputs.tag }}
+          prerelease: ${{ steps.extract_version.outputs.beta == 'true' }}
+          draft: true
+          files: build/app/outputs/flutter-apk/*.apk
+          generate_release_notes: true
