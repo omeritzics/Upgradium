@@ -1049,26 +1049,6 @@ class AppsPageState extends State<AppsPage> {
                     onPressed: selectedAppIds.isEmpty
                         ? null
                         : () {
-                            String urls = '';
-                            for (var a in selectedApps) {
-                              urls +=
-                                  'https://apps.updatium.imranr.dev/redirect?r=updatium://app/${Uri.encodeComponent(jsonEncode({'id': a.id, 'url': a.url, 'author': a.author, 'name': a.name, 'preferredApkIndex': a.preferredApkIndex, 'additionalSettings': jsonEncode(a.additionalSettings), 'overrideSource': a.overrideSource}))}\n\n';
-                            }
-                            Share.share(
-                              urls,
-                              subject: 'Updatium - ${tr('appsString')}',
-                            );
-                          },
-                    child: Text(
-                      tr('shareAppConfigLinks'),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const Divider(),
-                  TextButton(
-                    onPressed: selectedAppIds.isEmpty
-                        ? null
-                        : () {
                             var encoder = const JsonEncoder.withIndent("    ");
                             var exportJSON = encoder.convert(
                               appsProvider.generateExportJSON(

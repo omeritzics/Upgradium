@@ -971,16 +971,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     IconButton(
                       onPressed: () {
-                        launchUrlString(
-                          'https://apps.updatium.imranr.dev/',
-                          mode: LaunchMode.externalApplication,
-                        );
-                      },
-                      icon: const Icon(Icons.apps_rounded),
-                      tooltip: tr('crowdsourcedConfigsLabel'),
-                    ),
-                    IconButton(
-                      onPressed: () {
                         context.read<LogsProvider>().get().then((logs) {
                           if (logs.isEmpty) {
                             showMessage(UpdatiumError(tr('noLogs')), context);
