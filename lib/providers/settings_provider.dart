@@ -24,6 +24,8 @@ enum SortColumnSettings { added, nameAuthor, authorName, releaseDate }
 
 enum SortOrderSettings { ascending, descending }
 
+enum AppsViewType { list, grid }
+
 class SettingsProvider with ChangeNotifier {
   SharedPreferences? prefs;
   String? defaultAppDir;
@@ -532,6 +534,16 @@ class SettingsProvider with ChangeNotifier {
 
   set useFGService(bool val) {
     prefs?.setBool('useFGService', val);
+    notifyListeners();
+  }
+
+  AppsViewType get appsViewType {
+    return AppsViewType
+        .values[prefs?.getInt('appsViewType') ?? AppsViewType.list.index];
+  }
+
+  set appsViewType(AppsViewType t) {
+    prefs?.setInt('appsViewType', t.index);
     notifyListeners();
   }
 }
