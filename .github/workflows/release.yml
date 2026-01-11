@@ -21,10 +21,11 @@ jobs:
           channel: stable
           cache: true
 
-      - uses: actions/setup-java@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17' # Recommended for most Flutter/Android builds
 
       - name: Extract Version
         id: extract_version      
@@ -34,19 +35,22 @@ jobs:
           echo "tag=v$VERSION" >> $GITHUB_OUTPUT
           echo "beta=${{ github.event.inputs.beta }}" >> $GITHUB_OUTPUT
 
-      - name: Generate Temporary Keystore
+      - name: Decode Keystore
         run: |
-          keytool -genkey -v -keystore upload-keystore.jks \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -alias upload -dname "CN=Updatium, OU=Dev, O=Updatium, L=IL, S=IL, C=IL" \
-            -storepass "password123" -keypass "password123"
-          echo "storePassword=password123" > android/key.properties
-          echo "keyPassword=password123" >> android/key.properties
-          echo "alias=upload" >> android/key.properties
-          echo "storeFile=../upload-keystore.jks" >> android/key.properties
+          # Recover the permanent signing key from GitHub Secrets
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+
+      - name: Create key.properties
+        run: |
+          # Create the configuration file for the Gradle signing process using secrets
+          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
+          echo "alias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+          echo "storeFile=upload-keystore.jks" >> android/key.properties
 
       - name: Build APKs
         run: |
+          # Build signed APKs for both standard and F-Droid flavors
           flutter build apk --flavor normal --release
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release
 
@@ -57,11 +61,11 @@ jobs:
           path: build/app/outputs/flutter-apk/*.apk
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2 # Updated to v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: ${{ steps.extract_version.outputs.tag }}
-          prerelease: ${{ steps.extract_version.outputs.beta == 'true' }}
+          prerelease: ${{ github.event.inputs.beta == true }}
           draft: true
           files: build/app/outputs/flutter-apk/*.apk
           generate_release_notes: true
