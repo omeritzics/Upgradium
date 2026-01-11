@@ -1266,7 +1266,7 @@ class AppsPageState extends State<AppsPage> {
       );
     }
 
-    getDisplayedList() {
+getDisplayedList() {
       return settingsProvider.groupByCategory &&
               !(listedCategories.isEmpty ||
                   (listedCategories.length == 1 && listedCategories[0] == null))
@@ -1286,7 +1286,6 @@ class AppsPageState extends State<AppsPage> {
                 return getSingleAppHorizTile(index);
               }, childCount: listedApps.length),
     }
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: RefreshIndicator(
