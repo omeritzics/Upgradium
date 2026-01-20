@@ -56,7 +56,7 @@ jobs:
       - name: Build APK (Debug Mode)
         run: |
           # הסרת הגדרות חתימה כדי למנוע שגיאות ב-CI (Kotlin DSL syntax)
-          sed -i 's/signingConfig = .*release.*/signingConfig = null/g' android/app/build.gradle.kts || true
+          sed -i 's/signingConfig = signingConfigs\..*release.*/signingConfig = null/g' android/app/build.gradle.kts || true
           
           flutter build apk --debug --flavor normal
           
