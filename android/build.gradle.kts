@@ -21,7 +21,11 @@ subprojects {
         if (project.hasProperty("android")) {
             val android = project.extensions.getByName("android")
             if (android is com.android.build.gradle.BaseExtension) {
-                android.compileSdkVersion(34)
+                val minCompileSdk = (rootProject.findProperty("updatium.minCompileSdk") as? String)?.toIntOrNull() ?: 34
+                val currentSdk = android.compileSdkVersion?.substringAfter("-")?.toIntOrNull() ?: 0
+                if (currentSdk < minCompileSdk) {
+                    android.compileSdkVersion(minCompileSdk)
+                }
             }
         }
     }
