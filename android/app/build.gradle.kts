@@ -29,8 +29,8 @@ if (keystorePropertiesExists) {
 }
 
 android {
-    val minCompileSdk = (project.findProperty("updatium.minCompileSdk") as? String)?.toIntOrNull() ?: 34
-    val minTargetSdk = (project.findProperty("updatium.minTargetSdk") as? String)?.toIntOrNull() ?: 34
+    val minCompileSdk = (rootProject.findProperty("updatium.minCompileSdk") as? String)?.toIntOrNull() ?: 34
+    val minTargetSdk = (rootProject.findProperty("updatium.minTargetSdk") as? String)?.toIntOrNull() ?: 34
 
     namespace = "com.omeritzics.updatium"
     compileSdk = (flutter.compileSdkVersion ?: 0).let { if (it < minCompileSdk) minCompileSdk else it }
