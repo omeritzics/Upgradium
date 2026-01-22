@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17'
 
       - name: Extract Version
         id: extract_version      
@@ -56,8 +56,6 @@ jobs:
           flutter build apk --flavor normal --release --obfuscate --split-debug-info=build/debug-info
           
           flutter build apk --flavor fdroid -t lib/main_fdroid.dart --release --obfuscate --split-debug-info=build/debug-info
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME_21_X64 }}
 
       - name: Save APKs as Artifacts
         uses: actions/upload-artifact@v6
