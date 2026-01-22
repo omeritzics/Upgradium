@@ -17,7 +17,7 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
-    val applySdkOverride = {
+    afterEvaluate {
         if (project.hasProperty("android")) {
             val android = project.extensions.getByName("android")
             if (android is com.android.build.gradle.BaseExtension) {
@@ -27,14 +27,6 @@ subprojects {
                     android.compileSdkVersion(minCompileSdk)
                 }
             }
-        }
-    }
-
-    if (project.state.executed) {
-        applySdkOverride()
-    } else {
-        project.afterEvaluate {
-            applySdkOverride()
         }
     }
 }
