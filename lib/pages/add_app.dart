@@ -329,8 +329,8 @@ class AddAppPageState extends State<AddAppPage> {
           settingsProvider.searchDeselected = sourceStrings.keys
               .where((s) => !searchSources.contains(s))
               .toList();
-          List<MapEntry<String, Map<String, List<String>>>?>
-          results = (await Future.wait(
+          List<MapEntry<String, Map<String, List<String>>>>
+          results = (await Future.wait<MapEntry<String, Map<String, List<String>>>?>(
             sourceProvider.sources
                 .where((e) => searchSources.contains(e.name))
                 .map((e) async {
@@ -394,7 +394,7 @@ class AddAppPageState extends State<AddAppPage> {
                     }
                   }
                 }),
-          )).where((a) => a != null).toList();
+          )).whereType<MapEntry<String, Map<String, List<String>>>>().toList();
 
           // Interleave results instead of simple reduce
           Map<String, MapEntry<String, List<String>>> res = {};
@@ -403,7 +403,7 @@ class AddAppPageState extends State<AddAppPage> {
           while (!done) {
             done = true;
             for (var r in results) {
-              var sourceName = r!.key;
+              var sourceName = r.key;
               if (r.value.length > si) {
                 done = false;
                 var singleRes = r.value.entries.elementAt(si);
