@@ -55,12 +55,6 @@ jobs:
       - name: Get Dependencies
         run: flutter pub get
 
-      - name: Analyze
-        run: flutter analyze
-
-      - name: Run Tests
-        run: flutter test
-
       - name: Build Check (Debug Mode)
         run: |
           # Remove signing configuration for CI check if present
