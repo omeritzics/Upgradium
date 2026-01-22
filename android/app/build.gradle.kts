@@ -29,8 +29,11 @@ if (keystorePropertiesExists) {
 }
 
 android {
+    val minCompileSdk = (project.findProperty("updatium.minCompileSdk") as String).toInt()
+    val minTargetSdk = (project.findProperty("updatium.minTargetSdk") as String).toInt()
+
     namespace = "com.omeritzics.updatium"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = (flutter.compileSdkVersion ?: 0).let { if (it < minCompileSdk) minCompileSdk else it }
     ndkVersion = "28.2.13676358"
 
     compileOptions {
@@ -48,7 +51,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = (flutter.targetSdkVersion ?: 0).let { if (it < minTargetSdk) minTargetSdk else it }
         versionCode = flutterVersionCode.toInt()
         versionName = flutterVersionName
     }
