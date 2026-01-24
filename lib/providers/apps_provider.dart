@@ -67,12 +67,12 @@ class AppInMemory {
         : installedInfo?.signingInfo?.signingCertificateHistory;
 
     return signatures?.map((signature) {
-          final digest = sha256.convert(signature);
-          return digest.bytes
-              .map((b) => b.toRadixString(16).padLeft(2, '0').toUpperCase())
-              .join(':');
-        }).toList() ??
-        [];
+      final digest = sha256.convert(signature);
+      return digest.bytes
+        .map((b) => b.toRadixString(16).padLeft(2, '0').toUpperCase())
+        .join(':');
+      }).toList() ??
+      [];
   }
 }
 
@@ -500,9 +500,8 @@ Future<File> downloadFile(
 
 Future<List<PackageInfo>> getAllInstalledInfo() async {
   return await pm.getInstalledPackages(
-        flags: PackageInfoFlags({PMFlag.getSigningCertificates}),
-      ) ??
-      [];
+      flags: PackageInfoFlags({PMFlag.getSigningCertificates})
+  ) ?? [];
 }
 
 Future<PackageInfo?> getInstalledInfo(
