@@ -636,6 +636,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   ShizukuApkInstaller.checkPermission().then((
                                     resCode,
                                   ) {
+                                    if (!context.mounted) return;
                                     settingsProvider.useShizuku = resCode!
                                         .startsWith('granted');
                                     switch (resCode) {
@@ -972,6 +973,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     IconButton(
                       onPressed: () {
                         context.read<LogsProvider>().get().then((logs) {
+                          if (!context.mounted) return;
                           if (logs.isEmpty) {
                             showMessage(UpdatiumError(tr('noLogs')), context);
                           } else {
@@ -1065,6 +1067,7 @@ class _LogsDialogState extends State<LogsDialog> {
                   },
                 )) !=
                 null;
+            if (!context.mounted) return;
             if (cont) {
               logsProvider.clear();
               Navigator.of(context).pop();
@@ -1080,7 +1083,9 @@ class _LogsDialogState extends State<LogsDialog> {
         ),
         TextButton(
           onPressed: () {
-            Share.share(logString ?? '', subject: tr('appLogs'));
+            SharePlus.instance.share(
+              ShareParams(text: logString ?? '', subject: tr('appLogs')),
+            );
             Navigator.of(context).pop();
           },
           child: Text(tr('share')),
