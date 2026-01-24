@@ -884,37 +884,7 @@ class AppsPageState extends State<AppsPage> {
         ),
         controlAffinity: ListTileControlAffinity.leading,
         trailing: Text(tiles.length.toString()),
-        children: settingsProvider.useGridView
-            ? [
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 150,
-                    childAspectRatio: 0.8,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: tiles.length,
-                  itemBuilder: (context, i) {
-                    // We need to map back to original index, but tiles was mapped from entries
-                    // This logic is a bit complex for reusing tiles list which contains widgets.
-                    // Better to rebuild logic or just support list view for categories for now
-                    // or adapt code.
-                    // Actually, let's keep Category view as List only for MVP simplicity
-                    // or implement a basic grid inside the expansion tile.
-                    // For now, let's just stick to tiles for list view inside categories.
-                    return tiles[i];
-                  },
-                ),
-              ]
-            : tiles, // To support grid we would need to restructure `tiles` logic significantly
-        // or just return tiles if grid view is not supported for categories yet.
-        // Wait, the plan said "Ensure features like Group by Category still work or are handled gracefully".
-        // Let's force list view for categories for now if implementation is complex,
-        // OR render grid items inside if `useGridView`.
-        // The `tiles` variable holds Widgets from `getSingleAppHorizTile`.
-        // We need grid tiles.
+        children: tiles,
       );
     }
 
