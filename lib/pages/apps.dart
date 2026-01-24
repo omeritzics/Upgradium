@@ -725,7 +725,7 @@ class AppsPageState extends State<AppsPage> {
       if (numCategories > 1) {
         stops = [
           ...categories.asMap().entries.map(
-            (e) => ((e.key / (numCategories - 1)) - 0.0001),
+            (e) => ((e.key / (numCategories - 1)) - 0.0001).clamp(0.0, 1.0),
           ),
           1.0,
         ];
