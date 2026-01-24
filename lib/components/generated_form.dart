@@ -372,7 +372,7 @@ class _GeneratedFormState extends State<GeneratedForm> {
           }
           return DropdownButtonFormField(
             decoration: InputDecoration(labelText: formItem.label),
-            value: values[formItem.key],
+            initialValue: values[formItem.key],
             items: formItem.opts!.map((e2) {
               var enabled = formItem.disabledOptKeys?.contains(e2.key) != true;
               return DropdownMenuItem(

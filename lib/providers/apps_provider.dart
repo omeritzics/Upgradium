@@ -62,7 +62,7 @@ class AppInMemory {
 
   List<String> get certificateHashes {
     // https://developer.android.com/reference/android/content/pm/SigningInfo#getApkContentsSigners()
-    final signatures = this.hasMultipleSigners
+    final signatures = hasMultipleSigners
         ? installedInfo?.signingInfo?.apkContentSigners
         : installedInfo?.signingInfo?.signingCertificateHistory;
 
@@ -828,7 +828,7 @@ class AppsProvider with ChangeNotifier {
     // https://developer.android.com/reference/android/content/pm/PackageInstaller.SessionParams#setRequireUserAction(int)
     if (!(targetSDK != null && targetSDK >= requiredSDK)) {
       logs.add(
-        'App currently targets API ${targetSDK} which is too low for background updates (requires API ${requiredSDK}): ${app.id}',
+        'App currently targets API $targetSDK which is too low for background updates (requires API $requiredSDK): ${app.id}',
       );
       return false;
     }
