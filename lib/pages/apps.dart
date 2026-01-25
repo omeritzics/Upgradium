@@ -230,8 +230,11 @@ class AppsPageState extends State<AppsPage> {
                   child: IconButton(
                     icon: Icon(
                       Icons.clear,
-                        _searchController.clear();
-                      },
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() {
                         _searchQuery = '';
                       });
                     },
