@@ -844,7 +844,7 @@ class AppsPageState extends State<AppsPage> {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 11, color: Colors.white60),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 11),
                     ),
                   ),
                   const SizedBox(height: 12),
