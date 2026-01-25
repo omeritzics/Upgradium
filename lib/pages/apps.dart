@@ -306,7 +306,7 @@ class AppsPageState extends State<AppsPage> {
       if (_searchQuery.isNotEmpty) {
         final query = _searchQuery.toLowerCase();
         final matchesName = app.name.toLowerCase().contains(query);
-        final matchesAuthor = app.author.toLowerCase().contains(query);
+        final matchesAuthor = (app.author ?? '').toLowerCase().contains(query);
         final matchesId = app.app.id.toLowerCase().contains(query);
         
         if (!matchesName && !matchesAuthor && !matchesId) {
