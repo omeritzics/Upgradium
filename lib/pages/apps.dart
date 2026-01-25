@@ -811,6 +811,7 @@ class AppsPageState extends State<AppsPage> {
                 ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(height: 12),
                   SizedBox(height: 64, width: 64, child: getAppIcon(index)),
@@ -820,17 +821,15 @@ class AppsPageState extends State<AppsPage> {
                     child: Text(
                       listedApps[index].name,
                       textAlign: TextAlign.center,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontWeight: listedApps[index].app.pinned
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
@@ -838,7 +837,7 @@ class AppsPageState extends State<AppsPage> {
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: TextStyle(fontSize: 11, color: Colors.white60),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -1459,7 +1458,7 @@ class AppsPageState extends State<AppsPage> {
           return SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 150,
-              childAspectRatio: 0.8,
+              childAspectRatio: 0.7,
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
             ),
