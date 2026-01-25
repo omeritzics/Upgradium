@@ -236,11 +236,8 @@ class AppsPageState extends State<AppsPage> {
                       _searchController.clear();
                       setState(() {
                         _searchQuery = '';
-                      });
+                      _searchController.clear();
                     },
-                    visualDensity: VisualDensity.compact,
-                  ),
-                ),
               ]
             : [],
         onChanged: (value) {
