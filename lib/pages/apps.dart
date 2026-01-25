@@ -137,6 +137,8 @@ class AppsPageState extends State<AppsPage> {
   );
   Set<String> selectedAppIds = {};
   DateTime? refreshingSince;
+  late TextEditingController _searchController;
+  String _searchQuery = '';
 
   bool clearSelected() {
     if (selectedAppIds.isNotEmpty) {
@@ -164,6 +166,88 @@ class AppsPageState extends State<AppsPage> {
   late final ScrollController scrollController = ScrollController();
 
   var sourceProvider = SourceProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+    _searchController.addListener(() {
+      setState(() {
+        _searchQuery = _searchController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  Widget _buildSearchBar(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      child: SearchBar(
+        controller: _searchController,
+        hintText: tr('search'),
+        hintStyle: WidgetStatePropertyAll(
+          Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+        textStyle: WidgetStatePropertyAll(
+          Theme.of(context).textTheme.bodyMedium,
+        ),
+        backgroundColor: WidgetStatePropertyAll(
+          Theme.of(context).colorScheme.surfaceContainerHighest,
+        ),
+        elevation: const WidgetStatePropertyAll(0),
+        side: WidgetStatePropertyAll(
+          BorderSide(
+            color: Theme.of(context).colorScheme.outlineVariant,
+            width: 1,
+          ),
+        ),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Icon(
+            Icons.search,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+        trailing: _searchQuery.isNotEmpty
+            ? [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.clear,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    onPressed: () {
+                      _searchController.clear();
+                      setState(() {
+                        _searchQuery = '';
+                      });
+                    },
+                    visualDensity: VisualDensity.compact,
+                  ),
+                ),
+              ]
+            : [],
+        onChanged: (value) {
+          setState(() {
+            _searchQuery = value;
+          });
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1503,6 +1587,9 @@ class AppsPageState extends State<AppsPage> {
             controller: scrollController,
             slivers: <Widget>[
               CustomAppBar(title: tr('appsString')),
+              SliverToBoxAdapter(
+                child: _buildSearchBar(context),
+              ),
               ...getLoadingWidgets(),
               getDisplayedList(),
             ],
