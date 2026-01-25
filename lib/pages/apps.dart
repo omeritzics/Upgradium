@@ -240,11 +240,7 @@ class AppsPageState extends State<AppsPage> {
                     },
               ]
             : [],
-        onChanged: (value) {
-          setState(() {
-            _searchQuery = value;
-          });
-        },
+        // Remove the onChanged callback entirely
       ),
     );
   }
