@@ -78,4 +78,4 @@ jobs:
         if: always()
         run: |
           rm -f "$GITHUB_WORKSPACE/upload-keystore.jks" || true
-          rm -f android/key.properties || true
+          rm -f "$GITHUB_WORKSPACE/android/key.properties" || true
