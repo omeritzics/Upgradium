@@ -171,11 +171,11 @@ class AppsPageState extends State<AppsPage> {
   var sourceProvider = SourceProvider();
 
   @override
-  void initState() {
-    super.initState();
-    _searchController = TextEditingController();
-    _searchController.addListener(() {
-      setState(() {
+  // _searchController.addListener(() {
+  //   setState(() {
+  //     _searchQuery = _searchController.text;
+  //   });
+  // });
         _searchQuery = _searchController.text;
       });
     });
