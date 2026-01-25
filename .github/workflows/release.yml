@@ -77,5 +77,7 @@ jobs:
       - name: Cleanup signing files
         if: always()
         run: |
-          rm -f "$GITHUB_WORKSPACE/upload-keystore.jks" || true
-          rm -f "$GITHUB_WORKSPACE/android/key.properties" || true
+          if [ -n "$GITHUB_WORKSPACE" ]; then
+            rm -f "$GITHUB_WORKSPACE/upload-keystore.jks" || true
+            rm -f "$GITHUB_WORKSPACE/android/key.properties" || true
+          fi
