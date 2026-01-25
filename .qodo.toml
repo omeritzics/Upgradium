@@ -52,6 +52,7 @@ denylist_globs = [
   "**/google-services.json", "**/*-key.properties", "**/local.properties"
 ]
 allow_outside_repo = false  # Disallow accessing files outside the repo root
+follow_symlinks = false     # Prevent following symbolic links to external files
 
 # Language hints to optimize indexing/parsing
 languages = ["dart", "yaml", "json", "toml", "shell"]
