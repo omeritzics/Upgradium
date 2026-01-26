@@ -170,15 +170,29 @@ class AppsPageState extends State<AppsPage> {
 
   var sourceProvider = SourceProvider();
 
+  Timer? _debounce;
+
   @override
   void initState() {
     super.initState();
     _searchController = TextEditingController();
     _searchController.addListener(() {
-      setState(() {
-        _searchQuery = _searchController.text;
+      if (_debounce?.isActive ?? false) _debounce!.cancel();
+      _debounce = Timer(const Duration(milliseconds: 500), () {
+        if (mounted) {
+          setState(() {
+            _searchQuery = _searchController.text;
+          });
+        }
       });
     });
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
