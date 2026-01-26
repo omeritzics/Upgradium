@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Não mostrar alertas de \"somente rastreamento\"",
     "dontShowAPKOriginWarnings": "Não mostrar alertas de origem dos APKs",
     "moveNonInstalledAppsToBottom": "Mover apps não instalados ao final da tela de apps",
+    "hideNonInstalledApps": "Ocultar apps não instalados",
     "gitlabPATLabel": "Token de acesso pessoal do GitLab",
     "about": "Sobre",
     "requiresCredentialsInSettings": "{} precisa de credenciais adicionais (nas Configurações)",

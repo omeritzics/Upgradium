@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Ne plu montri 'Nur sekvita' avertojn",
     "dontShowAPKOriginWarnings": "Ne plu montri avertojn pri APK-origino",
     "moveNonInstalledAppsToBottom": "Movi neinstalatajn apojn al malsupro de la langeto Apoj",
+    "hideNonInstalledApps": "Hide non-installed apps",
     "gitlabPATLabel": "GitLab persona atingoĵetono",
     "about": "Pri",
     "requiresCredentialsInSettings": "{} bezonas kromajn informojn (en Agordoj)",

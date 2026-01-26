@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "'Sadece takip edilir' uyarılarını gösterme",
     "dontShowAPKOriginWarnings": "APK kaynağı uyarılarını gösterme",
     "moveNonInstalledAppsToBottom": "Yüklü olmayan uygulamaları uygulamalar görünümünün altına taşı",
+    "hideNonInstalledApps": "Yüklü olmayan uygulamaları gizle",
     "gitlabPATLabel": "GitLab kişisel erişim anahtarı",
     "about": "Hakkında",
     "requiresCredentialsInSettings": "{} ek kimlik bilgileri gerektirir (Ayarlarda)",

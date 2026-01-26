@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Geen waarschuwingen weergeven voor 'Alleen volgen'",
     "dontShowAPKOriginWarnings": "Geen waarschuwingen weergeven voor APK-herkomst",
     "moveNonInstalledAppsToBottom": "Niet-geïnstalleerde apps onderaan de apps-lijst plaatsen",
+    "hideNonInstalledApps": "Hide non-installed apps",
     "gitlabPATLabel": "GitLab persoonlijk toegangskenmerk",
     "about": "Over",
     "requiresCredentialsInSettings": "{} vereist aanvullende referenties (in Instellingen)",

@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Nezobrazovat varování pro „pouze sledované“",
     "dontShowAPKOriginWarnings": "Nezobrazovat varování o původu APK",
     "moveNonInstalledAppsToBottom": "Přesunout nenainstalované aplikace na konec zobrazení Aplikace",
+    "hideNonInstalledApps": "Skrýt neinstalované aplikace",
     "gitlabPATLabel": "Osobní přístupový token GitLab",
     "about": "Informace",
     "requiresCredentialsInSettings": "{} vyžaduje další pověření (v nastavení)",

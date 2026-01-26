@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "هشدار 'فقط ردیابی' را نشان ندهید",
     "dontShowAPKOriginWarnings": "هشدارهای منبع APK را نشان ندهید",
     "moveNonInstalledAppsToBottom": "برنامه های نصب نشده را به نمای پایین برنامه ها منتقل کنید",
+    "hideNonInstalledApps": "پنهان کردن برنامه‌های نصب‌نشده",
     "gitlabPATLabel": "رمز دسترسی شخصی GitLab",
     "about": "درباره",
     "requiresCredentialsInSettings": "{}: این به اعتبارنامه های اضافی نیاز دارد (در تنظیمات)",
