@@ -301,11 +301,11 @@ class AppsPageState extends State<AppsPage> {
         final matchesAuthor = app.author?.toLowerCase().contains(query) ?? false;
       if (_searchQuery.isNotEmpty) {
         final query = _searchQuery.toLowerCase();
-        final matchesName = app.name.toLowerCase().contains(query);
-        final matchesAuthor = (app.author ?? '').toLowerCase().contains(query);
-        final matchesId = app.app.id.toLowerCase().contains(query);
-        
-        if (!matchesName && !matchesAuthor && !matchesId) {
+        final name = app.name.toLowerCase();
+        final author = (app.author ?? '').toLowerCase();
+        final id = app.app.id.toLowerCase();
+  
+        if (!name.contains(query) && !author.contains(query) && !id.contains(query)) {
           return false;
         }
       }
