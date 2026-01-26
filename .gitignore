@@ -54,3 +54,4 @@ app.*.map.json
 TODO.txt
 data
 node_modules/
+.flutter
