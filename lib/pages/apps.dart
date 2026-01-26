@@ -193,7 +193,6 @@ class AppsPageState extends State<AppsPage> {
     _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
-    super.dispose();
   }
 
   Widget _buildSearchBar(BuildContext context) {
