@@ -298,7 +298,6 @@ class AppsPageState extends State<AppsPage> {
       if (app.app.installedVersion == null && !(filter.includeNonInstalled)) {
         return false;
       }
-        final matchesAuthor = app.author?.toLowerCase().contains(query) ?? false;
       if (_searchQuery.isNotEmpty) {
         final query = _searchQuery.toLowerCase();
         final name = app.name.toLowerCase();
