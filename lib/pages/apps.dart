@@ -299,7 +299,7 @@ class AppsPageState extends State<AppsPage> {
       }
       if (_searchQuery.isNotEmpty) {
         final query = _searchQuery.toLowerCase();
-        final name = app.name.toLowerCase();
+        final name = (app.name ?? '').toLowerCase();
         final author = (app.author ?? '').toLowerCase();
         final id = app.app.id.toLowerCase();
   
