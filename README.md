@@ -1,5 +1,6 @@
 # ![Updatium Icon](./assets/graphics/icon_small.png) Updatium
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/omeritzics/Updatium)](https://github.com/omeritzics/Updatium/releases/latest)
 [![Nightly Build](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/nightly.yml)
 [![Dependency review](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/dependency-review.yml)
 [![OSV-Scanner](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml/badge.svg)](https://github.com/omeritzics/Updatium/actions/workflows/osv-scanner.yml)
