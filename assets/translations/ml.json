@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "'ട്രാക്ക്-മാത്രം' മുന്നറിയിപ്പുകൾ കാണിക്കരുത്",
     "dontShowAPKOriginWarnings": "APK ഉറവിട മുന്നറിയിപ്പുകൾ കാണിക്കരുത്",
     "moveNonInstalledAppsToBottom": "ഇൻസ്റ്റാൾ ചെയ്യാത്ത ആപ്പുകൾ ആപ്പ് കാഴ്ചയുടെ താഴേക്ക് മാറ്റുക",
+    "hideNonInstalledApps": "ഇൻസ്റ്റാൾ ചെയ്യാത്ത ആപ്പുകൾ മറയ്ക്കുക",
     "gitlabPATLabel": "GitLab പേഴ്സണൽ ആക്സസ് ടോക്കൺ",
     "about": "വിവരങ്ങൾ",
     "requiresCredentialsInSettings": "{}-ന് അധിക ക്രെഡൻഷ്യലുകൾ ആവശ്യമാണ് (ക്രമീകരണങ്ങളിൽ)",

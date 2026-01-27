@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Visa inte 'Följ-Endast' varningar",
     "dontShowAPKOriginWarnings": "Visa inte APK-ursprung varningar",
     "moveNonInstalledAppsToBottom": "Flytta icke-installerade appar till botten av appvyn",
+    "hideNonInstalledApps": "Dölj icke-installerade appar",
     "gitlabPATLabel": "Personligt åtkomsttoken för GitLab",
     "about": "Om",
     "requiresCredentialsInSettings": "{}: This needs additional credentials (in Settings)",

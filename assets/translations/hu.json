@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "„Csak nyomon követés” figyelmeztetés elrejtése",
     "dontShowAPKOriginWarnings": "APK eredetére vonatkozó figyelmeztetések elrejtése",
     "moveNonInstalledAppsToBottom": "Nem telepített alkalmazások áthelyezése az alkalmazásnézet aljára",
+    "hideNonInstalledApps": "Nem telepített alkalmazások elrejtése",
     "gitlabPATLabel": "GitLab személyes hozzáférési token",
     "about": "Névjegy",
     "requiresCredentialsInSettings": "A(z) {} alkalmazásnak további hitelesítő adatokra van szüksége (a beállításokban)",

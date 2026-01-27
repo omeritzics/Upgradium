@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Ne prikazuj upozorenja „Samo za  praćenje”",
     "dontShowAPKOriginWarnings": "Ne prikazuj upozorenja o porijeklu APK-a",
     "moveNonInstalledAppsToBottom": "Premjesti neinstalirane aplikacije na dno prikaza aplikacija",
+    "hideNonInstalledApps": "Sakrij neinstalirane aplikacije",
     "gitlabPATLabel": "GitLab token za lični pristup",
     "about": "O nama",
     "requiresCredentialsInSettings": "{}: Za ovo su potrebni dodatni akreditivi (u Postavkama)",

@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Don't show 'track-only' warnings",
     "dontShowAPKOriginWarnings": "Don't show APK origin warnings",
     "moveNonInstalledAppsToBottom": "Move non-installed apps to bottom of apps view",
+    "hideNonInstalledApps": "Hide non-installed apps",
     "gitlabPATLabel": "GitLab personal access token",
     "about": "About",
     "requiresCredentialsInSettings": "{} needs additional credentials (in Settings)",

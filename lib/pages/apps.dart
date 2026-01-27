@@ -218,7 +218,8 @@ class AppsPageState extends State<AppsPage> {
           !(filter.includeUptodate)) {
         return false;
       }
-      if (app.app.installedVersion == null && !(filter.includeNonInstalled)) {
+      if (app.app.installedVersion == null &&
+          (settingsProvider.hideNonInstalled || !(filter.includeNonInstalled))) {
         return false;
       }
       if (filter.nameFilter.isNotEmpty || filter.authorFilter.isNotEmpty) {

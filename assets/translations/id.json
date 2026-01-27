@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Jangan tampilkan peringatan 'Pelacakan Saja'",
     "dontShowAPKOriginWarnings": "Jangan tampilkan peringatan asal APK",
     "moveNonInstalledAppsToBottom": "Pindahkan aplikasi tidak terpasang ke bawah tampilan aplikasi",
+    "hideNonInstalledApps": "Sembunyikan aplikasi yang belum terpasang",
     "gitlabPATLabel": "Token Akses Pribadi GitLab",
     "about": "Tentang",
     "requiresCredentialsInSettings": "{} memerlukan kredensial tambahan (dalam pengaturan)",

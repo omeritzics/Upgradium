@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Vis ikke 'Følg Kun'-advarsler",
     "dontShowAPKOriginWarnings": "Vis ikke advarsler om APK-oprindelse",
     "moveNonInstalledAppsToBottom": "Flyt ikke-installerede apps nederst i app-visning",
+    "hideNonInstalledApps": "Skjul ikke-installerede apps",
     "gitlabPATLabel": "GitLab Personlig Adgangstoken",
     "about": "Om",
     "requiresCredentialsInSettings": "{} kræver yderligere legitimation (i Indstillinger)",

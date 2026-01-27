@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "Không hiển thị cảnh báo 'Chỉ theo dõi'",
     "dontShowAPKOriginWarnings": "Không hiển thị cảnh báo nguồn gốc APK",
     "moveNonInstalledAppsToBottom": "Chuyển Ứng dụng chưa được cài đặt xuống cuối danh sách",
+    "hideNonInstalledApps": "Ẩn các ứng dụng chưa được cài đặt",
     "gitlabPATLabel": "Token truy cập cá nhân GitLab",
     "about": "Giới thiệu",
     "requiresCredentialsInSettings": "{}: Điều này cần thông tin xác thực bổ sung (trong Thiết đặt)",

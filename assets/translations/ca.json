@@ -231,6 +231,7 @@
     "dontShowTrackOnlyWarnings": "No mostris avisos de les aplicacions 'només per a seguiment'",
     "dontShowAPKOriginWarnings": "No mostris avisos dels orígens de les APKs",
     "moveNonInstalledAppsToBottom": "Desplaça les aplicacions no instal·lades al capdavall de les aplicacions",
+    "hideNonInstalledApps": "Amaga les aplicacions no instal·lades",
     "gitlabPATLabel": "Token d'accés personal a GitLab",
     "about": "Quant a",
     "requiresCredentialsInSettings": "{} requereix credencials addicionals (a Paràmetres)",
