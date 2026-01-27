@@ -48,29 +48,40 @@ jobs:
             echo "Sync script not found, skipping..."
           fi
 
-      - name: Build APK (Debug Mode)
+      - name: Set App Name and Build APK
         run: |
+          # 1. הסרת הסיומת "debug" משם האפליקציה ב-Manifest
+          sed -i 's/android:label=".*"/android:label="Updatium"/g' android/app/src/main/AndroidManifest.xml
+          
+          # 2. הסרת הגדרות חתימה כדי למנוע שגיאות ב-Build ללא Keystore
           sed -i 's/signingConfig = signingConfigs.getByName("release")//g' android/app/build.gradle* || true
           
-          flutter build apk --debug --flavor normal
+          # 3. בניית ה-APK:
+          # build-name: הגרסה שתוצג באפליקציה (26.1)
+          # build-number: המספר הפנימי שעולה בכל הרצה ומאפשר התקנת עדכון
+          flutter build apk --debug --flavor normal \
+            --build-name="26.1" \
+            --build-number="${{ github.run_number }}"
           
+
           mkdir -p build/outputs/
-          cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-qama-v26.${{ github.run_number }}.apk
+          cp build/app/outputs/flutter-apk/app-normal-debug.apk build/outputs/updatium-qama-v26.1-run${{ github.run_number }}.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Updatium-Qama-v26.${{ github.run_number }}
-          path: build/outputs/updatium-qama-v26.${{ github.run_number }}.apk
+          name: Updatium-Qama-v26.1-run${{ github.run_number }}
+          path: build/outputs/updatium-qama-v26.1-run${{ github.run_number }}.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: qama-v26.${{ github.run_number }}
-          name: "Updatium Qama v26.${{ github.run_number }}"
-          files: build/outputs/updatium-qama-v26.${{ github.run_number }}.apk
+          tag_name: qama-v26.1-run${{ github.run_number }}
+          name: "Updatium Qama v26.1 (Run ${{ github.run_number }})"
+          files: build/outputs/updatium-qama-v26.1-run${{ github.run_number }}.apk
           prerelease: true
           draft: true
+          body: "This is an automated build of Updatium Qama. Version: 26.1 (Build ${{ github.run_number }})"
           overwrite: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
